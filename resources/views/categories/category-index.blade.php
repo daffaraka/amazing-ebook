@@ -4,6 +4,8 @@
 
         <h1 class="text-center mb-3">Category</h1>
 
+        <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">Add New Category </a>
+
         <div class="px-0">
             <form action="{{ route('category.index') }}" class="d-flex">
                 <select name="filter" class="form-control">
@@ -13,17 +15,21 @@
 
                 </select>
                 <button type="submit" class="btn btn-primary">Filter</button>
-                <a href="{{route('category.index')}}" class="btn btn-info">Reset</a>
+                <a href="{{ route('category.index') }}" class="btn btn-info">Reset</a>
             </form>
         </div>
+
 
         @foreach ($category as $data)
             <div class="row  mb-4 p-3 ">
 
                 <div class="card p-0">
-                    <div class="card-header">
-                        <h3>
-                            {{ $data->name }} </h3>
+                    <div class="card-header d-flex justify-content-between">
+                        <h3> {{ $data->name }} </h3>
+                        <div>
+                            <a href="{{ route('category.edit', $data->id) }}" class="btn btn-warning mb-3">Edit </a>
+                            <a href="{{ route('category.delete', $data->id) }}" class="btn btn-danger mb-3">Delete </a>
+                        </div>
                     </div>
 
                     @forelse ($data->Book as $book)

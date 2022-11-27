@@ -87,8 +87,14 @@ class PublisherController extends Controller
 
     public function destroy($id)
     {
-        //
-    }
+        $publisher = Publishers::findOrFail($id);
 
+        if($publisher) {
+            File::delete('Publisher Image/'.$publisher->image);
+            $publisher->delete();
+        }
+
+        return redirect()->route('publisher.index');
+    }
 
 }
